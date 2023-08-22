@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>idealista - Moradias e apartamentos, arrendamentos e venda, anúncios gratuitos</title>
+    <link rel="stylesheet" href="Untitled-2.css">
+
+</head>
+
+<body>
+    <nav id="nav_top">
+        <ul id="nave">
+            <li><img src="img/idealista.svg" alt="idealista" id="idealista"></li>
+            <li class="itens_nav" id="pub_anuncio"><div id="dois"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" 
+                class="icon_pin" height="24px" viewBox="0 0 24 24" width="24px" fill="#B62682"><g>
+                <path d="M14,4v5c0,1.12,0.37,2.16,1,3H9c0.65-0.86,1-1.9,1-3V4H14 M17,2H7C6.45,2,6,2.45,6,3c0,0.55,0.45,1,1,1c0,0,0,0,0,0l1,0v5 c0,1.66-1.34,3-3,3v2h5.97v7l1,1l1-1v-7H19v-2c0,0,0,0,0,0c-1.66,0-3-1.34-3-3V4l1,0c0,0,0,0,0,0c0.55,0,1-0.45,1-1 C18,2.45,17.55,2,17,2L17,2z"/></g>
+                </svg></i>Publica o teu anúncio grátis</div></li>
+            <li class="itens_nav" id="inicio_sessao"><div id="um"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="purple"
+                    class="icon_pessoa" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                </svg>Iniciar sessão</div></li>
+                <li class="itens_nav" class="select">
+                    <div id="header">
+                        <div class="dropdown">
+                            <button class="link"><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/pt.svg"><span id="media">Português</span> </button>
+                            <div class="dropdown-menu">
+                                <div><img class="flag" src="https://st1.idealista.pt/static/common/release/modules/resources/img/flags/gb.svg">English</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/es.svg">Español</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/fr.svg">Frances</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/de.svg">Deutsch</div>
+                                <div><img class="flag" src="https://st1.idealista.pt/static/common/release/modules/resources/img/flags/dk.svg">Dansk</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/it.svg">Italiano</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/no.svg">Norsk</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/nl.svg">Nederlands</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/pl.svg">Polski</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/ru.svg">Русский</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/ro.svg">Română</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/fi.svg">Suomi</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/se.svg">Svenska</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/gr.svg">Ελληνικά</div>
+                                <div><img class="flag" src="	https://st1.idealista.pt/static/common/release/modules/resources/img/flags/zh.svg">中文</div>
+                                <a>idialista.com</a>
+                                <a>idialista.it</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+        </ul>
+    </nav>
+    <div id="casa_faro"><img src="img/Captura de ecrã 2022-01-02 190751.png" alt="Casa em Quarteira, Faro"
+            id="img_faro"> </div>
+            <section id="new-search-box">
+                <h1 id="nada_dura" >
+                    Nada dura para sempre
+                </h1>
+                <form class="form_class">
+                    
+                    <div id="compra_arrenda">
+                            <button type="button" class="button comprar-arrendar active" onclick="clickButton(this)">Comprar</button>
+                                
+                            
+                            <button type="button" class="button comprar-arrendar" onclick="clickButton(this)">Arrendar</button>
+                                
+                    </div>
+
+                    <div class="select2" >
+                        <select id="typology" name="typology" class="dropdown-list">
+                            <option  value="home"> Casas e apartamentos</option>
+                            <option value="newdevelopment"> Nova construção</option>
+                            <option value="room"> Quartos</option>
+                            <option value="garage"> Garagens</option>
+                            <option value="storageroom"> Arrecadações</option>
+                            <option value="office"> Escritórios</option>
+                            <option value="warehouse"> Espaços comerciais ou armazéns</option>
+                            <option value="land"> Terrenos</option>
+                            <option value="building"> Prédios</option>
+                        </select>
+                    </div>
+                    <div class="form-item-block" >
+                        <input id="campoBus" autocomplete="off" type="text" 
+                            placeholder="Município, freguesia, metro...">
+                        
+                    </div>
+                    <button id="procurar" class="procurar">
+                        Procurar
+                    </button>
+                </form>
+            </section>
+    
+
+
+            
+
+    <div class="mapa">
+        <a class="itens" id="itens1">
+                <img id="img1" src="https://st1.idealista.pt/static/common/release/home/resources/img/draw-search/draw-search-small.jpg?20211223-1222%22%3E">
+                <div class="txt1">
+                    <h3 class="titulo1" aria-level="3">Desenha a tua zona de pesquisa</h3>
+                    <span role="region" class="txt_caixa1">Escolher exatamente a zona de pesquisa</span>
+                    <span role="button" class="link1">Desenhar a tua zona de pesquisa</span>
+                </div>
+                
+        </a>
+
+
+        <a class="itens" id="itens2">
+                <img id="img2" src="https://st1.idealista.pt/static/common/release/home/resources/img/put-property/pt/put-property-large.jpg?20211223-1222%22%3E">
+                <div class="txt2">
+                    <h3 class="titulo2">Publica o teu imóvel grátis</h3>
+                    <span role="region" class="txt_caixa2">Os teus 2 primeiros anúcios são grátis. Casas, quartos, escritórios... Temos espaço para todos!</span><br><br>
+                    <span role="button" class="link2">Publicar um anúcio grátis</span>
+                </div>
+                
+        </a>
+    </div>
+    <div class="caixa_int">
+        <div id="img_div"><img src="img/mortgages-small-devices.jpg" id="img_range"></div>
+        <div class="itens_range">
+            <h2 class="titulo3">Os créditos á habitação de todos os bancos num único lugar</h3>
+            <div id="preco_imovel">
+                <span id="txt_preco">Preço do imóvel</h5>
+                <h5 id="txt_range1">245.000€</h5>
+                <div id="range_div1">
+                    <input type="range" id="range1" min="0" max="400000" step="10000">
+                    <div id="selector_range1">
+                        <div class="selectorBtn1"></div>
+                        <div id="selectValue1"></div>
+                    </div>
+                    <div id="progresso_barra"></div>
+                </div>
+            </div>
+           
+           
+           
+           <div id="poupancas">
+                <span id="txt_poupancas">Poupanças</h5>
+                <h5 id="txt_range2">70000€</h5>
+                <div id="range_div2">
+                    <input type="range" id="range2" min="0" max="320000" step="10000">
+                    <div id="selector_range2">
+                        <div class="selectorBtn2"></div>
+                        <div id="selectValue2"></div>
+                    </div>
+                    <div id="progresso_barra2"></div>
+                </div>
+            </div>
+            <span role="button" class="link2" id="anuncio_gratis">Publicar um anúcio grátis</span>
+        </div>
+
+    </div>
+
+    <div class="caixa_txt1">
+        
+        <div class="texto_caixa1">
+            <h2 class="leva_o_" id="esconder_h2" onclick="esconder()">Leva o idealista sempre contigo</h3>
+            <div id="texto_interno">
+                <p id="txt_span1">Com a nossa app serás o primeiro a saber se há novos imóveis, alterações nos teus favoritos e mensagens no chat.</p>
+                <img src="img/qr_code.png" id="qr_code" >
+            </div>
+            
+        </div>
+        <div id="img_div1"><img src="img/apps-small-devices.jpg" id="img_tele"></div>
+    </div>
+
+
+    <div class="caixa_txt2">
+        
+        <div class="texto_caixa2">
+            <h2 class="conhecer_os_">Conhecer os detalhes de qualquer imóvel</h3>
+            <div id="texto_interno2">
+                <p id="txt_span2">Com a nossa app serás o primeiro a saber se há novos imóveis, alterações nos teus favoritos e mensagens no chat.</p>
+                <a id="link_caixa">Pesquisar dados e avaliações de qualquer imóvel</a>
+            </div>
+            
+        </div>
+        <div id="img_div2"><img src="img/maps-small-devices.jpg" id="img_ecra"></div>
+    </div>
+
+
+
+
+
+    <div class="caixa_txt3">
+        
+        <div class="texto_caixa3">
+            <h2 class="casas_rurais_">Casas rurais em Espanha, Itália e Portugal para te resguardares do frio no inverno</h3>
+            <div id="texto_interno3">
+                <p id="txt_span3">Todos queremos umas férias e desligarmo-nos do dia-a-dia, quer seja na praia, nas montanhas ou na cidade. Vais resistir a uma escapadinha rural? Lareira, churrasqueira, jardim, piscina... tu escolhes.</p>
+                <a id="link_caixa2">Ver arrendamentos de férias para o inverno</a>
+            </div>
+            
+        </div>
+        <div id="img_div3"><img src="img/rentalia-small-devices-winter.jpg" id="img_casa_madeira"></div>
+    </div>
+
+    <div id="noticias">
+        <span id="news_div"><img class="news" src="img/idealista news2.jpeg"></span><br>
+        <span class="noticias">As principais notícias e atualidade sobre o mercado imobiliádo e negócios.</span><br>
+
+        <div id="border">
+            
+            <ul id="ul_border">
+                <li id="noticias_ajuste"><button type="button" class="botao menu ativo" onclick="clickbotao(this)"> Notícias destacadas</button> </li>
+                <li><button  type="button" class="botao menu" onclick="clickbotao(this)">Imobiliário</button></li>
+                <li><button  type="button" class="botao menu" onclick="clickbotao(this)">Finanças</button></li>
+                <li><button  type="button" class="botao menu" onclick="clickbotao(this)">Férias</button></li>
+                <li><button  type="button" class="botao menu" onclick="clickbotao(this)">Decoração</button></li>
+            </ul>
+            
+
+        </div>
+        <div id="traco"></div>
+        
+        <div id="caixas_conjunto">
+            <div class="destacadas" >
+                <a class="caixa" id="caixa">
+                        <img id="img3" src="https://st3.idealista.pt/news/arquivos/styles/news_detail/public/2022-01/pexels-ketut-subiyanto-4245921.jpg?sv=SYEcJNxp&itok=1wgioDYw%22%3E">
+                        <div class="flex">
+                            <span class="casa">Comprar ou arrendar casa? 77% dos portugueses são proprietários</span>
+                            <b class="lermais">Ler mais</b>
+                        </div>
+                </a>
+            </div>
+    
+            <div class="destacadas" >
+                <a class="caixa" id="caixa">
+                        <img id="img3" src="https://st3.idealista.pt/news/arquivos/styles/news_detail/public/2022-01/pintar_a_parede.jpg?sv=LZQnJVHx&itok=u1QyPnU8%22%3E">
+                        <div class="flex">
+                            <span class="casa">Pintar paredes em casa: como escolher a cor e o tipo de tinta?</span>
+                            <b class="lermais">Ler mais</b>
+                        </div>
+                </a>
+            </div>
+            <div class="destacadas" >
+                <a class="caixa" id="caixa">
+                        <img id="img3" src="https://st3.idealista.pt/news/arquivos/styles/news_detail/public/2022-01/garden_house7.jpg?sv=1JlAnU70&itok=RvH5EfF9%22%3E">
+                        <div class="flex">
+                            <span class="casa">Esta casa na Austrália utiliza energia solar e baterias Tesla para ser autossuficiente</span>
+                            <b class="lermais">Ler mais</b>
+                        </div>
+                </a>
+            </div>
+        </div>
+        
+
+        <span id="ver_span"><a id="ver">Ver mais notícias Imobiliárias</a></span>
+    </div>    
+
+
+
+
+
+    <div id="txt_imgs">
+        <h2 id="Tbm_txt">Também estamos em Espanha e Itália</h2>
+        <div class="caixas_paises">
+            <a id="espanha">
+                <img src="img/siluetax2_es.png" id="espanha_img">
+                <span id="txt_es">
+                    <span id="idea_es">idealista Espanha</span>
+                    <span id="espanha_txt">Mais de um milhão de imóveis</span>
+            </a>
+            <a id="italia">
+                <img src="img/siluetax2_it.png" id="italia_img">
+                <span id="txt_it">                        
+                    <span id="idea_it">idealista Itália</span>
+                    <span id="italia_txt">Mais de um milhão de imóveis</span>
+            </a>
+        </div>
+    </div>
+
+
+    <div id="javascript">
+        <div id="dados">
+            <div id="tipologia">
+                <span>Tipologia - T:<input type="number" min="0" id="T_" placeholder="1,2,..." required></span>
+            </div>
+            <div id="area">
+                <span>Área</span><input type="number" min="0" id="area_" placeholder="m2" required>
+            </div>
+            <div id="idade">
+                <span>Idade do imóvel</span><input type="number" min="0" id="idade_" placeholder="1,2,..." required>
+            </div>
+            <div id="garagem_">
+                <span>Tem garagem?</span>
+
+                <input type="radio" id="tp_nao" name="tp" checked>
+                <label for="tp_nao">Não</label>
+
+                <input type="radio" id="tp_sim" name="tp" >
+                <label for="tp_sim">Sim</label>
+            </div>
+            <div id="transportes_">
+                <span>Tem transportes<br> públicos perto?</span>
+
+                <input type="radio" id="bus_nao" name="bus" checked>
+                <label for="bus_nao">Não</label>
+
+                <input type="radio" id="bus_sim" name="bus" >
+                <label for="bus_sim">Sim</label>
+
+                
+            </div>
+            <button id="botao_simulação" onclick="simular()">Simular</button>
+        </div>
+
+    </div>
+
+
+    <div id="zonas">
+        <div id="zona_1">
+            <div class="hover_zona">
+                <h3>Zona 1</h3>
+                <span id="num_zona1">___ </span><span> €</span>
+            </div>
+            <div id="area_util">
+                <span>€/m2: 1200€</span>
+                <span>área útil:<span id="num_area1"></span></span>
+                <span>Idade do imovel:<span id="num_idade1"></span></span>
+            </div>
+        </div>
+
+        <div id="zona_2">
+            <div class="hover_zona">
+                <h3>Zona 2</h3>
+                <span id="num_zona2">___ </span><span> €</span>
+            </div>
+            <div id="area_util">
+                <span>€/m2: 2000€</span>
+                <span>área útil:<span id="num_area2"></span></span>
+                <span>Idade do imovel:<span id="num_idade2"></span></span>
+            </div>
+        </div>
+
+        <div id="zona_3">
+            <div class="hover_zona">
+                <h3>Zona 3</h3>
+                <span id="num_zona3">___ </span><span> €</span>
+            </div>
+            <div id="area_util">
+                <span>€/m2: 2500€</span>
+                <span>área útil:<span id="num_area3"></span></span>
+                <span>Idade do imovel:<span id="num_idade3"></span></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_financiamento" >
+        <div id="financiamento">
+            <div id="montante">
+                <span>Montante Financiado :<input type="number" min="0" id="financiado" placeholder=" €" required></span>
+            </div><br>
+            <div id="entrada">
+                <span>Entrada Inicial :</span><input type="number" min="0" id="inicial" placeholder=" €" required>
+            </div><br>
+            <div id="prazo">
+                <span>Prazo  :</span><input type="number" min="0" id="prazo_anos" placeholder=" anos" required>
+            </div><br>
+            
+        
+        </div>
+        <button id="botao_financiamento" onclick="financiar()">Financiamento</button>
+    </div>
+
+
+
+    <div id="bancos">
+        <div id="banco_1">
+            <div id="milenium">
+                <img id="milenium_" src="img/milenium2.jpeg">
+            </div>
+            <div id="dados_banco">
+                <span>Montante Total:<span id="montante1"></span></span>
+                <span>Entrada Inicial:<span id="entrada_inicial1"></span></span>
+                <span>Valor do Emprestimo:<span id="valor_do_emprestimo1"></span></span>
+                <span>Spread:<span id="spread1"></span></span>
+                <span>Taxa de Juro Global:<span id="taxa_de_juro_global1"></span></span>
+                <span>Prestação Mensal:<span id="prestaçao_mensal1"></span></span>
+            </div>
+        </div><br>
+        
+
+        <div id="banco_2">
+            <div id="caixadepositos">
+                <img id="caixa_depositos" src="img/caixa geral.jpeg">
+            </div>
+            <div id="dados_banco_2">
+                <span>Montante Total:<span id="montante2"></span></span>
+                <span>Entrada Inicial:<span id="entrada_inicial2"></span></span>
+                <span>Valor do Emprestimo:<span id="valor_do_emprestimo2"></span></span>
+                <span>Spread:<span id="spread2"></span></span>
+                <span>Taxa de Juro Global:<span id="taxa_de_juro_global2"></span></span>
+                <span>Prestação Mensal:<span id="prestaçao_mensal2"></span></span>
+            </div>
+        </div>
+        
+
+        <div id="banco_3">
+            <div id="santander">
+                <img id="santander_" src="img/santander.jpeg">
+            </div>
+            <div id="dados_banco_3">
+                <span>Montante Total:<span id="montante3"></span></span>
+                <span>Entrada Inicial:<span id="entrada_inicial3"></span></span>
+                <span>Valor do Emprestimo:<span id="valor_do_emprestimo3"></span></span>
+                <span>Spread:<span id="spread3"></span></span>
+                <span>Taxa de Juro Global:<span id="taxa_de_juro_global3"></span></span>
+                <span>Prestação Mensal:<span id="prestaçao_mensal3"></span></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="traco2"></div>
+
+    <div id="lista">
+        <nav id="estas_a">
+            <h3 class="titulo_txt">Estás à procura de casa?</h3>
+            <ul>
+                <li id="motor_pesquisa">Motor de pesquisa principal</li>
+                <li><a>Casas à venda em Portugal</a></li>
+                <li><a>Arrendamento de casas em Portugal</a></li>
+                <li><a>Apartamentos de bancos</a></li>
+                <li><a>Casas e apartamentos em arrendamento</a></li>
+                <li><a>Apartamentos partilhados</a></li>
+                <li><a>Rentalia, arrendamento para férias</a></li>
+                <li><a>Estimar preço do imóvel</a></li>
+                <li><a>Relatórios de preços</a></li>
+                <li><a>idealista maps</a></li>
+                <li><a>Apartamentos e casas de luxo à venda em Portugal</a></li>
+                <li><a>Apartamentos e casas de luxo para arrendar em Portugal</a></li>        
+        </nav>
+        
+        <nav id="tens_um">
+            <h3>Tens um imóvel?</h3>
+            <ul>
+                <li><a>Publica o teu anúncio grátis</a></li>
+                <li><a>Serviços para anunciantes particulares</a></li>
+                <li><a>Melhorar as fotos do teu anúncio</a></li>
+            </ul>
+        </nav>
+        <nav id="es_profissional">
+            <h3>És profissional imobiliário?</h3>
+            <ul>
+                <li><a>Publica os teus imóveis profissionais</a></li>
+                <li><a>Já és cliente? Entra na tua conta</a></li>
+                <li><a>Cursos imobiliários</a></li>
+                <li><a>Publicidade no idealista</a></li>
+                <li><a>idealista/tools: Software de gestão para imobiliárias</a></li>
+                <li><a>idealista/data: tecnologia para a análise imobiliária</a></li>
+                <li><a>Avaibook: software para gerir os teus arrendamentos turísticos</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <footer>
+        
+        <div id="img_svg">
+            <img id="svg" src="img/idealista.svg">
+        </div>
+        <div id="margem_footer">
+            <div class="sobre">
+                <nav class="box" >
+                    <b id="titulos">Sobre o idealista</b>
+                    <ul id="oedialista">
+                        <li><a>Sobre nós</a></li>
+                        <li><a>Media</a></li>
+                        <li><a>Trabalho connosco</a></li>
+                        <li><a>idealista/créditohabitação</a></li>
+                        <li><a>idealista/data</a></li>
+                        <li><a>idealista/news</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="box">
+                    <b id="titulos">Ajuda</b>
+                    <ul id="oedialista">
+                        <li><a>Perguntas frequentes (FAQs)</a></li>
+                        <li><a>Contacta com o idealista</a></li>
+                        <li><a>Privacidade</a></li>
+                        <li><a>Política de cookies</a></li>
+                        <li><a>Condições gerais</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="box">
+                    <b id="titulos">Outros países</b>
+                    <ul id="oedialista">
+                        <li><a>idealista Espanha</a></li>
+                        <li><a>idealista Itália</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="telemovel">
+                <b id="titulo">Por telemóvel ou Tablet</b>
+                <nav class="app">
+                    <a><img class="img_PNG" src="img/apple store.JPEG"> </a>
+                    <a><img class="img_PNG" src="img/google play.JPEG"> </a>
+                    <a><img class="img_PNG" src="img/App galery.JPEG"> </a>
+                </nav>
+                <div class="social">
+                    <a><img class="redes" src="img/facebook.JPEG"> </a>
+                    <a><img class="redes" src="img/twitter.JPEG"> </a>
+                    <a><img class="redes" src="img/youtube.JPEG"> </a>
+                    <a><img class="redes" src="img/insta.JPEG"> </a>
+                </div>
+                <div  id="copy">
+                    <b>idealista</b>
+                    <span id="2022">Copyright © 2000-2022</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+<script type="text/javascript" src="document.js"></script>
+</body>
+
+</html>

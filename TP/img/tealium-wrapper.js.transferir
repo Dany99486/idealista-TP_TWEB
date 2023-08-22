@@ -1,0 +1,402 @@
+window.modules = window.modules || {};
+
+(function () {
+    'use strict';
+    if (typeof Object.assign !== 'function') {
+        // Must be writable: true, enumerable: false, configurable: true
+        Object.defineProperty(Object, "assign", {
+            value: function assign(target, varArgs) { // .length of function is 2
+            'use strict';
+            if (target === null || target === undefined) {
+                throw new TypeError('Cannot convert undefined or null to object');
+            }
+
+            var to = Object(target);
+
+            for (var index = 1; index < arguments.length; index++) {
+                var nextSource = arguments[index];
+
+                if (nextSource !== null && nextSource !== undefined) { 
+                for (var nextKey in nextSource) {
+                    // Avoid bugs when hasOwnProperty is shadowed
+                    if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                    to[nextKey] = nextSource[nextKey];
+                    }
+                }
+                }
+            }
+            return to;
+            },
+            writable: true,
+            configurable: true
+        });
+    }
+})();
+
+(function () {
+    'use strict';
+
+    modules.Maybe = function (value) {
+        return {
+            isNothing: function () {
+                return value === null || value === undefined;
+            },
+
+            just: function (value) {
+                return modules.Maybe(value);
+            },
+
+            nothing: function () {
+                return modules.Maybe(null);
+            },
+
+            map: function (fn) {
+                return !this.isNothing()?
+                    this.just(fn(value)) :
+                    this.nothing();
+            },
+
+            chain: function (fn) {
+                return !this.isNothing() ?
+                    fn(value) :
+                    this.nothing();
+            },
+
+            withDefault: function (defaultValue) {
+                return this.isNothing()?
+                    defaultValue :
+                    value;
+            }
+        };
+    };
+
+})();
+
+(function () {
+    'use strict';
+
+    modules.Emitter = function () {
+        var callbacks = {};
+
+        return {
+            on: function (name, calbback) {
+                if(!callbacks[name]) {
+                    callbacks[name] = [];
+                }
+
+                callbacks[name].push(calbback);
+            },
+
+            emit: function (name) {
+                if(callbacks[name]) {
+                    var args = arguments;
+                    callbacks[name].forEach(function (cb) {
+                        cb.apply(cb, [].slice.call(args, 1));
+                    });
+                }
+            },
+
+            offAll: function (name) {
+                if(callbacks[name]) {
+                    callbacks[name] = [];
+                }
+            }
+        };
+    };
+})();
+
+var modules = window.modules || {};
+modules.Traits = modules.Traits || {};
+
+(function () {
+    'use strict';
+
+    modules.Traits.Define = function (behaviour) {
+        var instanceKeys = Object.getOwnPropertyNames(behaviour);
+
+        return function define(object) {
+            instanceKeys.forEach(function(property) {
+                if (!object[property]) {
+                    Object.defineProperty(object, property, {
+                      value: behaviour[property],
+                      writable: true
+                    });
+                } else throw new Error('illegal attempt to override ' + property + ', which already exist');
+                    
+            });
+            return object;
+        };
+    };
+})();
+;var modules = window.modules || {};
+modules.Traits = modules.Traits || {};
+
+(function () {
+    'use strict';
+    
+    modules.Traits.Override = function (behaviour) {
+         var instanceKeys = Object.getOwnPropertyNames(behaviour);
+
+        return function overrides(object) {
+            instanceKeys.forEach(function(property) {
+                if (!!object[property]) {
+                    var overriddedMethodFunction = object[property];
+
+                    Object.defineProperty(object, property, {
+                        value: function() {
+                            return behaviour[property].apply(
+                                this,
+                                [].concat([].slice.call(arguments), [overriddedMethodFunction.bind(this)])
+                            );
+                        },
+                        writable: true
+                    });
+                } else throw new Error('attemp to override non-existant method ' + property);
+                    
+            });
+            return object;
+        };
+    };
+})();
+;var modules = window.modules || {};
+
+(function () {
+    'use strict';
+
+    window.ICookieManager = modules.Traits.Define({
+        openPreferences: function () {
+            throw new Error('openPreferences must be implemented');
+        },
+
+        onConsentsChanged: function (callback) {
+            throw new Error('onConsentsChanged must be implemented');
+        },
+
+        onDidomiReadyWithConsents: function (callback) {
+            throw new Error('onDidomiReadyWithConsents must be implemented');
+        },
+
+        onReady: function (callback) {
+            throw new Error('onReady must be implemented');
+        },
+
+        onNoticeShown: function (callback) {
+            throw new Error('onLoaded must be implemented');
+        },
+
+        hideNotice: function (callback) {
+            throw new Error('hideNotice must be implemented');
+        },
+    });
+})();
+;/* globals window */
+var modules = window.modules || {};
+var Didomi = window.Didomi || null;
+window.didomiOnReady = window.didomiOnReady || [];
+window.didomiEventListeners = window.didomiEventListeners || [];
+
+(function () {
+    'use strict';
+
+    window.DidomiCookieManager = function () {
+        var runDidomiAction = function (action) {
+            return function (preferences) {
+                preferences[action]();
+            };
+        };
+
+        var getPreferenes = function (didomi) {
+            return modules.Maybe(didomi.preferences);
+        };
+
+        return modules.Traits.Override({
+            onNoticeShown: function (callback) {
+                window.didomiEventListeners.push({
+                    event: 'notice.shown',
+                    listener: callback.bind(this),
+                });
+            },
+
+            openPreferences: function () {
+                var DidomiInstance = modules.Maybe(Didomi);
+
+                DidomiInstance
+                    .chain(getPreferenes)
+                    .map(runDidomiAction('show'));
+            },
+
+            onConsentsChanged: function (callback) {
+                window.didomiEventListeners.push({
+                    event: 'consent.changed',
+                    listener: callback
+                });
+            },
+
+            onDidomiReadyWithConsents: function (callback) {
+                window.didomiOnReady.push(function () {
+                    callback();
+                });
+            },
+
+            onReady: function (callback) {
+                window.didomiEventListeners.push({
+                    event: 'consent.changed',
+                    listener: function () {
+                        callback(window.didomiState.didomiVendorsConsent);
+                    }
+                });
+            },
+
+            hideNotice: function () {
+                var getNotice = function (didomi) {
+                    return modules.Maybe(didomi.notice);
+                };
+
+                modules.Maybe(Didomi)
+                    .chain(getNotice)
+                    .map(runDidomiAction('hide'));
+            }
+        });
+    };
+})();
+;/* globals modules */
+
+modules.CookieManager = modules.CookieManager || {};
+
+(function () {
+    'use strict';
+
+    modules.CookieManager.create = function () {
+        var CookieManagerImpl = window.DidomiCookieManager();
+        return CookieManagerImpl(window.ICookieManager({}));
+    };
+})();
+/* globals console */
+
+window.Logger = window.Logger || {};
+window.loggerConfig = window.loggerConfig || {};
+(function () {
+    'use strict';
+
+    window.Logger = function () {
+        var config = window.loggerConfig;
+
+        return {
+            log: function (msg) {
+                if (config.active) {
+                    console.log(msg);
+                }
+            }
+        };
+    };
+})();
+
+/* globals modules */
+
+modules.CookieManager = modules.CookieManager || {};
+modules.Emitter = modules.Emitter || {};
+(function () {
+    'use strict';
+
+    var UtagEventParams = function (event, callback, tags) {
+        return { event: event, callback: callback, tags: tags };
+    };
+
+    var CookiesUtag = function (utag) {
+        var logger = window.Logger();
+        var eventFns = [];
+        var cookieManager = modules.CookieManager.create();
+        var status = false;
+
+        var saveConsentsToEvent = function (consents, event) {
+            event.didomiVendorsConsent = consents;
+        };
+
+        var runEvent = function (type, params) {
+            logger.log('\t> Running ' + type  + ' event. Vendor Consents:' + params.event.didomiVendorsConsent);
+            utag[type](params.event, params.callback, params.tags);
+        };
+
+        var runEvents = function (events) {
+            if(events.length) logger.log('-- Running delayed events --');
+            events.forEach(function (fn) {
+                fn();
+            });
+        };
+
+        var cleanEvents = function () {
+            eventFns = [];
+        };
+
+        var delayEvent = function (type, params) {
+            logger.log('-- A ' + type.toUpperCase()  + ' event was delayed --');
+            eventFns.push(function () {
+                saveConsentsToEvent(window.dataLayerContext.didomiVendorsConsent, params.event);
+                runEvent(type, params);
+            });
+        };
+
+        var activateViews = function () {
+            if (window.utag_cfg_ovrd.noview) {
+                window.utag_cfg_ovrd.noview = false;
+            }
+        };
+
+        var applyConsentsAndSendEvents = function () {
+            logger.log('-- Consents accepted --');
+            status = true;
+
+            window.dataLayerContext.didomiVendorsConsent = window.didomiState.didomiVendorsConsent;
+            runEvents(eventFns);
+            cleanEvents();
+            activateViews();
+        };
+
+        cookieManager.onDidomiReadyWithConsents(applyConsentsAndSendEvents);
+        cookieManager.onConsentsChanged(applyConsentsAndSendEvents);
+
+        return function (type) {
+            return function (event, callback, tags) {
+                var params = UtagEventParams(event, callback, tags);
+                if(!status) {
+                    delayEvent(type, params);
+                } else {
+                    saveConsentsToEvent(window.dataLayerContext.didomiVendorsConsent, params.event);
+                    logger.log('-- Running events directly --');
+                    runEvent(type, params);
+                }
+            };
+        };
+    };
+
+    var IdealistaUtag = function () {
+        var onInitIdEvent = 'onInit';
+        var initialized = false;
+        var emitterInstance = modules.Emitter();
+
+        var init = function () {
+            var cookiesUtag = CookiesUtag(Object.assign({}, window.utag));
+
+            window.utag.view = cookiesUtag('view');
+            window.utag.link = cookiesUtag('link');
+            window.utag.wrapped = true;
+            initialized = true;
+
+            emitterInstance.emit(onInitIdEvent);
+        };
+
+        return {
+            init: init,
+            onInit: function(onInitCb){
+                if (initialized) {
+                    onInitCb();
+                }
+                emitterInstance.on(onInitIdEvent, onInitCb);
+            }
+        };
+
+    };
+
+    window.idealistaUtag = IdealistaUtag();
+
+})();
